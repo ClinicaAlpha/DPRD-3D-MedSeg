@@ -3,6 +3,6 @@ Official implementation of Displacement Preserving Relational Distillation for R
 
 The code is being organized and will be released soon.
 
-## Citation
+Code will be released as soon as possible. Due to temporary issues with the remote server, the repository setup is currently delayed.
 
-Citation information will be added after the camera-ready version is finalized.
+
