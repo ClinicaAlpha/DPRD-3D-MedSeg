@@ -1,0 +1,35 @@
+# examples/config_mednext_teacher.yaml
+strategy: none
+teacher_checkpoint: null
+teacher_plans: null
+experiment_tag: 6stages
+
+
+student_architecture: nnunetv2.nets.mednext_v1.MedNeXtV1
+mednext_model_id: B
+mednext_kernel_size: 3
+mednext_grn: false
+
+
+# ==================== Training Configuration ====================
+num_epochs: 1000
+initial_lr: 0.01
+weight_decay: 0.00003
+
+# ==================== Validation & Checkpointing ====================
+val_interval: 20  # 每5个epoch验证一次，减少验证开销
+save_interval: 100
+early_stopping_patience: 30
+eval_with_best: true
+
+# ==================== Logging ====================
+log_interval: 50
+wandb_project: null
+wandb_name: null
+
+# ==================== Advanced Options ====================
+mixed_precision: true
+num_workers: 8  
+compile_model: True  
+
+kd_weight: 0.0

@@ -1,0 +1,64 @@
+# examples/config_mobileunetv3_student.yaml
+# ==================== Teacher Configuration ====================
+teacher_checkpoint: data/nnUNet_results/Dataset218_AMOS2022_postChallenge_task1/DistillationTrainer__none__MedNeXtV1__6stages__nnUNetPlans__3d_fullres/fold_3/checkpoint_best.pth
+teacher_plans: data/nnUNet_results/Dataset218_AMOS2022_postChallenge_task1/DistillationTrainer__none__MedNeXtV1__6stages__nnUNetPlans__3d_fullres/student_plans.json
+freeze_teacher: true
+
+configuration: 3d_fullres
+# Student model (heterogeneous architecture)
+student_architecture: nnunetv2.nets.mobile_unet_v3.MobileUNetV3
+student_plans: data/nnUNet_results/Dataset218_AMOS2022_postChallenge_task1/DistillationTrainer__none__R2__MobileUNetV3__nnUNetPlans__3d_fullres/plans.json
+reduction_factor: 4
+
+# ==================== Distillation Strategy ====================
+experiment_tag: DPRD_amos
+strategy: DPRD
+strategy_config:
+  layer_indices: [0, 1, 2, 3, 4, 5] # six stages
+  stage_weights: [0.05, 0.10, 0.10, 0.15, 0.25, 0.35]
+
+  # projection dimension d
+  proj_dim: 128
+
+  # relation losses
+  lam_delta: 1.0
+  lam_dist: 0.5
+  smooth_l1_beta: 1.0
+  eps: 1.0e-6
+
+
+  # ROI-aware pooling
+  use_mask: True
+  mask_threshold: 0.5
+  assume_background_channel: true
+
+# ==================== Loss Weights ====================
+kd_weight: 0.5
+kd_schedule: warmup
+kd_warmup_epochs: 150
+kd_warmup_start_epoch: 0
+
+# ==================== Training Configuration ====================
+configuration: 3d_fullres
+num_epochs: 1000
+initial_lr: 0.01
+weight_decay: 0.00003
+
+# ==================== Validation & Checkpointing ====================
+val_interval: 10
+save_interval: 100
+early_stopping_patience: 100
+eval_with_best: true
+
+# ==================== Logging ====================
+log_interval: 50
+wandb_project: null
+wandb_name: null
+
+# ==================== Advanced Options ====================
+mixed_precision: true 
+num_workers: 8 
+compile_model: True
+seed: 0000
+use_ema: true
+ema_decay: 0.999

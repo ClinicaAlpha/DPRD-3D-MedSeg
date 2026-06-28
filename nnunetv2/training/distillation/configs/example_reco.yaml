@@ -1,0 +1,46 @@
+# Example configuration for ReCo distillation
+# Recommended for general-purpose segmentation
+
+# ==================== Teacher Model ====================
+teacher_checkpoint: /path/to/teacher/fold_0/checkpoint_best.pth
+freeze_teacher: true
+
+# ==================== Student Model ====================
+reduction_factor: 1  # ReCo works well even with same size
+
+# ==================== Distillation Strategy ====================
+strategy: reco
+
+strategy_config:
+  # ReCo settings (channels auto-detected if omitted)
+  temp: 0.5                      # Attention temperature
+  tau: 1.0                       # Mask exponent
+  coef_fg: 1.0                   # Foreground loss weight
+  coef_bg: 1.0                   # Background loss weight
+  coef_mask: 1.0                 # Mask loss weight
+  coef_rel: 1.0                  # Relation loss weight
+  stage_alpha: 0.5               # For auto stage weights (0.5-1.0)
+  chunk_d: 16
+
+# ==================== Loss Weights ====================
+kd_weight: 0.01                  # Note: Usually smaller than boundary
+kd_schedule: warmup
+kd_warmup_epochs: 600            # Longer warmup for ReCo
+
+# ==================== Training Configuration ====================
+num_epochs: 1000
+initial_lr: 0.01
+weight_decay: 0.00003
+
+# ==================== Validation & Checkpointing ====================
+val_interval: 1
+save_interval: 100
+early_stopping_patience: 40
+
+# ==================== Logging ====================
+# wandb_project: medical_seg_distillation
+# wandb_name: reco_exp1
+
+# ==================== Advanced Options ====================
+mixed_precision: true
+seed: 42

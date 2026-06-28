@@ -1,0 +1,51 @@
+# Example configuration for boundary distillation
+# Save as: config.yaml
+# Usage: python train.py --config config.yaml --dataset Dataset018_BTCV --fold 0
+
+# ==================== Teacher Model ====================
+teacher_checkpoint: /path/to/teacher/fold_0/checkpoint_best.pth
+# teacher_plans: /path/to/teacher/plans.json  # Optional; if set, student build uses teacher plans by default
+freeze_teacher: true
+
+# ==================== Student Model ====================
+reduction_factor: 2  # Student has half the channels (1=same, 2=half, 4=quarter)
+
+# ==================== Distillation Strategy ====================
+strategy: boundary  # Options: boundary, reco, feature, none
+
+strategy_config:
+  # Boundary distillation settings
+  boundary_width: 3              # Boundary band width (3-5 recommended)
+  num_classes: 3                 # Number of classes (including background)
+  use_boundary_loss: true        # Enable boundary distillation
+  use_attention_loss: false      # Enable attention learning (adds parameters)
+  chunk_d: 16                    # Depth chunking (reduce if GPU memory limited)
+  temp: 0.5                      # Attention temperature
+
+# ==================== Loss Weights ====================
+kd_weight: 0.5                   # Weight of distillation loss
+kd_schedule: warmup              # Options: constant, warmup, cosine
+kd_warmup_epochs: 50             # Linearly increase KD weight for first N epochs
+
+# ==================== Training Configuration ====================
+num_epochs: 500
+initial_lr: 0.01
+weight_decay: 0.00003
+
+# ==================== Validation & Checkpointing ====================
+val_interval: 1                  # Run validation every N epochs
+save_interval: 100               # Save checkpoint every N epochs
+early_stopping_patience: 40      # Stop if no improvement for N epochs
+
+# ==================== Logging ====================
+log_interval: 10                 # Log metrics every N iterations
+
+# Optional: Weights & Biases logging
+# wandb_project: medical_seg_distillation
+# wandb_name: boundary_exp1
+
+# ==================== Advanced Options ====================
+mixed_precision: true            # Use mixed precision (AMP)
+compile_model: false             # Use torch.compile (PyTorch 2.0+)
+num_workers: 12                  # Data loading workers
+seed: 42                         # Random seed for reproducibility

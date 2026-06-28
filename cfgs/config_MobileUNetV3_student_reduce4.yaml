@@ -1,0 +1,28 @@
+# examples/config_mobileunetv3_student.yaml
+strategy: none
+teacher_checkpoint: null
+teacher_plans: data/nnUNet_preprocessed/Dataset218_AMOS2022_postChallenge_task1/nnUNetPlans.json
+
+student_architecture: nnunetv2.nets.mobile_unet_v3.MobileUNetV3
+reduction_factor: 4
+
+# ==================== Training Configuration ====================
+num_epochs: 1000
+initial_lr: 0.01
+weight_decay: 0.00003
+
+# ==================== Validation & Checkpointing ====================
+val_interval: 10
+save_interval: 100
+early_stopping_patience: 20
+eval_with_best: true
+
+# ==================== Logging ====================
+log_interval: 50
+wandb_project: null
+wandb_name: null
+
+# ==================== Advanced Options ====================
+mixed_precision: true 
+num_workers: 8 
+compile_model: True

@@ -1,0 +1,10 @@
+experiments:
+  - name: brats_reco_t025
+    dataset: Dataset019_BraTS2021
+    pred_dir: /bdm-das/qlan/Results/nnUNet_results/Dataset019_BraTS2021/DistillationTrainer__reco__R4__kd-warmup__t0.25__nnUNetResEncUNetLPlans__3d_fullres/fold_3/validation
+    save_csv: /bdm-das/qlan/Results/nnUNet_results/Dataset019_BraTS2021/DistillationTrainer__reco__R4__kd-warmup__t0.25__nnUNetResEncUNetLPlans__3d_fullres/fold_3/validation/nsd_hd95.csv
+
+  - name: btcv_simple_l2
+    dataset: Dataset018_BTCV
+    pred_dir: /bdm-das/qlan/Results/nnUNet_results/Dataset018_BTCV/DistillationTrainer__simple_L2__nnUNetResEncUNetLPlans__3d_fullres/fold_3/validation
+    save_csv: /bdm-das/qlan/Results/nnUNet_results/Dataset018_BTCV/DistillationTrainer__simple_L2__nnUNetResEncUNetLPlans__3d_fullres/fold_3/validation/nsd_hd95.csv
