@@ -5,4 +5,5 @@ The code is being organized and will be released soon.
 
 Code will be released as soon as possible. Due to temporary issues with the remote server, the repository setup is currently delayed.
 
+Sync test: verified repository write workflow.
 
