@@ -1,17 +1,37 @@
-# DPRD-3D-MedSeg
+# Displacement Preserving Relational Distillation for Robust Medical Segmentation
 
-Official implementation of **Displacement Preserving Relational Distillation for Robust Medical Segmentation**.
+<p align="center">
+  <a href="https://arxiv.org/abs/2607.04599"><img src="https://img.shields.io/badge/arXiv-2607.04599-b31b1b.svg?logo=arxiv" alt="arXiv"></a>
+  <a href="https://conferences.miccai.org/2026/en/"><img src="https://img.shields.io/badge/MICCAI-2026-0b6e99.svg" alt="MICCAI 2026"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg" alt="Apache 2.0 License"></a>
+</p>
 
-DPRD is a knowledge distillation framework for efficient and robust 3D medical image segmentation. Instead of directly matching dense voxel-wise activations, DPRD transfers teacher knowledge by aligning normalized pairwise displacement relations among ROI-pooled case-level embeddings. The method is implemented on top of nnU-Net v2 and supports heterogeneous teacher-student distillation, such as MedNeXt to MobileUNetV3.
+<p align="center">
+  <b>Zhicheng Ding</b><sup>*</sup>, <b>Xinyu Chu</b><sup>*</sup>, Jung Im Choi, <b>Qing Tian</b><sup>†</sup>, Tianyu Shi, Xiaoqian Jiang, Lijing Zhu, and <b>Qizhen Lan</b><sup>*†</sup>
+</p>
 
-## Highlights
+<p align="center">
+  <sup>*</sup> Equal contribution &nbsp; <sup>†</sup> Corresponding authors
+</p>
+
+<p align="center">
+  Accepted to <b>MICCAI 2026</b>
+</p>
+
+This repository contains the official implementation of **Displacement Preserving Relational Distillation (DPRD)** for efficient and robust 3D medical image segmentation. DPRD transfers structural knowledge through normalized pairwise displacement relations between ROI-aware case-level embeddings, rather than directly matching dense voxel-wise activations. It supports heterogeneous teacher-student pairs, including MedNeXt to MobileUNetV3.
+
+<p align="center">
+  <img src="assets/overview.png" alt="Overview of Displacement Preserving Relational Distillation" width="960">
+</p>
+
+## Key Ideas
 
 - **Displacement-preserving relational alignment** for scale-invariant local relational supervision.
 - **ROI-aware feature masking** to reduce background-dominated supervision in 3D volumes.
 - **Multi-stage encoder distillation** for hierarchical anatomical consistency.
 - **Efficient deployment**: teacher and projection layers are used only during training; inference uses the compact student model.
 
-## Performance
+## Main Results
 
 The paper evaluates DPRD on ISLES 2022 and AMOS 2022 against representative KD baselines including Logits KD, FitNet, RKD, and CIRKD.
 
@@ -41,7 +61,7 @@ The paper evaluates DPRD on ISLES 2022 and AMOS 2022 against representative KD b
 
 On AMOS, the MobileUNetV3 student uses roughly 5% of the teacher parameters and 3% of the teacher FLOPs while slightly exceeding the MedNeXt teacher in Dice.
 
-## Method Overview
+## Method Details
 
 DPRD consists of two main components:
 
@@ -141,7 +161,16 @@ scripts/                                   # Slurm and evaluation helpers
 
 ## Citation
 
-Citation information will be added after the camera-ready version is finalized.
+If you find this work useful, please cite:
+
+```bibtex
+@article{ding2026dprd,
+  title={Displacement Preserving Relational Distillation for Robust Medical Segmentation},
+  author={Ding, Zhicheng and Chu, Xinyu and Choi, Jung Im and Tian, Qing and Shi, Tianyu and Jiang, Xiaoqian and Zhu, Lijing and Lan, Qizhen},
+  journal={arXiv preprint arXiv:2607.04599},
+  year={2026}
+}
+```
 
 ## Acknowledgements
 
