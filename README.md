@@ -1,7 +1,6 @@
 # Displacement Preserving Relational Distillation for Robust Medical Segmentation
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2607.04599"><img src="https://img.shields.io/badge/arXiv-2607.04599-b31b1b.svg?logo=arxiv" alt="arXiv"></a>
   <a href="https://conferences.miccai.org/2026/en/"><img src="https://img.shields.io/badge/MICCAI-2026-0b6e99.svg" alt="MICCAI 2026"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg" alt="Apache 2.0 License"></a>
 </p>
